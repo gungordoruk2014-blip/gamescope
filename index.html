@@ -2,6 +2,7 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GameScope</title>
 
 <style>
@@ -13,11 +14,51 @@ animation:fire 3s infinite alternate;z-index:-1;}
 @keyframes fire{0%{filter:blur(10px);}100%{filter:blur(25px);}}
 
 header{text-align:center;padding:20px;font-size:30px;color:#ffae00;}
-.container{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px;padding:20px;}
-.card{background:rgba(0,0,0,0.7);padding:10px;border-radius:10px;}
-button{margin-top:10px;padding:8px;background:#ffae00;border:none;border-radius:5px;}
 
-.popup{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:black;padding:20px;}
+.container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:15px;
+padding:20px;
+}
+
+.card{
+background:rgba(0,0,0,0.7);
+padding:10px;
+border-radius:10px;
+text-align:center;
+transition:0.3s;
+}
+
+.card:hover{transform:scale(1.05);}
+
+img{
+width:100%;
+height:120px;
+object-fit:cover;
+border-radius:8px;
+}
+
+button{
+margin-top:10px;
+padding:8px;
+background:#ffae00;
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
+
+.popup{
+display:none;
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:black;
+padding:20px;
+overflow:auto;
+}
 </style>
 </head>
 
@@ -25,7 +66,13 @@ button{margin-top:10px;padding:8px;background:#ffae00;border:none;border-radius:
 
 <header>🔥 GameScope 🔥</header>
 
-<div class="container">
+<div class="container" id="games"></div>
+
+<div id="popup" class="popup">
+<h1 id="title"></h1>
+<p id="desc"></p>
+<button onclick="closePopup()">Kapat</button>
+</div>
 
 <script>
 let games = [
@@ -41,26 +88,30 @@ let games = [
 "Overwatch","Terraria","Subnautica","Ark","Rust"
 ];
 
-document.write(games.map(g=>`
+let container=document.getElementById("games");
+
+games.forEach(game=>{
+container.innerHTML+=`
 <div class="card">
-<h3>${g}</h3>
-<button onclick="openPopup('${g}')">İncele</button>
-</div>
-`).join(""));
-</script>
+<img src="https://source.unsplash.com/400x300/?game,${game}">
+<h3>${game}</h3>
+<button onclick="openPopup('${game}')">İncele</button>
+</div>`;
+});
 
-</div>
-
-<div id="popup" class="popup">
-<h1 id="title"></h1>
-<p id="desc"></p>
-<button onclick="closePopup()">Kapat</button>
-</div>
-
-<script>
 function openPopup(game){
-document.getElementById("title").innerText=game;
-document.getElementById("desc").innerText=game+" hakkında detaylar yakında eklenecek.";
+let title=document.getElementById("title");
+let desc=document.getElementById("desc");
+
+title.innerText=game;
+
+if(game=="GTA 6"){
+desc.innerText="GTA 6, Rockstar Games tarafından geliştirilen ve yıllardır beklenen en büyük açık dünya oyunlarından biridir. Oyunculara devasa bir harita, gerçekçi grafikler ve detaylı bir hikaye sunması beklenmektedir. Bu oyun, şehir yaşamını, suç dünyasını ve karakter etkileşimlerini en üst seviyeye taşıyacak şekilde tasarlanmıştır. Oyuncular özgürce dolaşabilir, görevler yapabilir ve kendi hikayelerini oluşturabilir. GTA 6’nın grafik motoru önceki oyunlara göre çok daha gelişmiş olup gerçek hayata çok yakın bir deneyim sunar. Araç sürüşü, karakter hareketleri ve çevre etkileşimleri tamamen yenilenmiştir. Rockstar’ın uzun yıllar süren çalışmasının sonucu olan bu oyun, oyun dünyasında büyük bir devrim yaratabilir.";
+}
+else{
+desc.innerText=game+" hakkında detaylar yakında eklenecek.";
+}
+
 document.getElementById("popup").style.display="block";
 }
 
