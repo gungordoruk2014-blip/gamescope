@@ -3,68 +3,29 @@
 <head>
 <meta charset="UTF-8">
 <title>GameScope</title>
-
-<style>
-body{margin:0;background:black;color:white;font-family:Arial;}
-header{text-align:center;padding:20px;font-size:30px;color:orange;}
-.container{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;padding:20px;}
-.card{background:#111;padding:10px;border-radius:10px;text-align:center;}
-img{width:100%;height:120px;object-fit:cover;border-radius:8px;}
-button{margin-top:10px;padding:8px;background:orange;border:none;border-radius:5px;}
-.popup{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:black;padding:20px;}
-</style>
 </head>
 
-<body>
+<body style="background:black; color:white; font-family:Arial; text-align:center;">
 
-<header>🎮 GameScope</header>
+<h1>🎮 GameScope</h1>
 
-<div class="container" id="games"></div>
+<h2>GTA 6</h2>
+<button onclick="alert('GTA 6 çok büyük açık dünya oyunu olacak.')">İncele</button>
 
-<div id="popup" class="popup">
-<h1 id="title"></h1>
-<p id="desc"></p>
-<button onclick="closePopup()">Kapat</button>
-</div>
+<h2>FC 25</h2>
+<button onclick="alert('Futbol oyunu.')">İncele</button>
 
-<script>
+<h2>Call of Duty</h2>
+<button onclick="alert('Savaş oyunu.')">İncele</button>
 
-let games = [
-"GTA 6","FC 25","Call of Duty","Minecraft","Fortnite","Valorant",
-"RDR2","Cyberpunk","God of War","Spider-Man"
-];
+<h2>Minecraft</h2>
+<button onclick="alert('Blok oyunu.')">İncele</button>
 
-let html = "";
+<h2>Fortnite</h2>
+<button onclick="alert('Battle royale.')">İncele</button>
 
-for(let i=0;i<games.length;i++){
-html += `
-<div class="card">
-<img src="https://picsum.photos/400/300?random=${i}">
-<h3>${games[i]}</h3>
-<button onclick="openGame('${games[i]}')">İncele</button>
-</div>
-`;
-}
-
-document.getElementById("games").innerHTML = html;
-
-function openGame(game){
-document.getElementById("title").innerText = game;
-
-if(game=="GTA 6"){
-document.getElementById("desc").innerText="GTA 6 Rockstar Games'in en büyük oyunu olacak. Dev harita, gerçekçi grafikler ve özgür oynanış sunacak. Oyuncular şehirde istedikleri gibi dolaşıp görev yapabilecek.";
-}else{
-document.getElementById("desc").innerText=game+" hakkında bilgiler yakında eklenecek.";
-}
-
-document.getElementById("popup").style.display="block";
-}
-
-function closePopup(){
-document.getElementById("popup").style.display="none";
-}
-
-</script>
+<h2>Valorant</h2>
+<button onclick="alert('FPS oyunu.')">İncele</button>
 
 </body>
 </html>
