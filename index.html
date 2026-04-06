@@ -2,27 +2,22 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GameScope</title>
 
 <style>
-body {margin:0;font-family:Arial;color:white;background:black;}
-body::before {
+body{margin:0;font-family:Arial;color:white;background:black;}
+body::before{
 content:"";position:fixed;width:100%;height:100%;
 background: radial-gradient(circle at 50% 100%, orange, red, black);
-animation: fire 3s infinite alternate;z-index:-1;}
-@keyframes fire {0%{filter: blur(10px);}100%{filter: blur(25px);}}
+animation:fire 3s infinite alternate;z-index:-1;}
+@keyframes fire{0%{filter:blur(10px);}100%{filter:blur(25px);}}
 
-header {text-align:center;padding:20px;font-size:30px;color:#ffae00;}
+header{text-align:center;padding:20px;font-size:30px;color:#ffae00;}
+.container{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:15px;padding:20px;}
+.card{background:rgba(0,0,0,0.7);padding:10px;border-radius:10px;}
+button{margin-top:10px;padding:8px;background:#ffae00;border:none;border-radius:5px;}
 
-.container {display:grid;grid-template-columns: repeat(auto-fit, minmax(250px,1fr));gap:20px;padding:20px;}
-
-.card {background: rgba(0,0,0,0.7);padding:15px;border-radius:10px;transition:0.3s;}
-.card:hover {transform:scale(1.05);}
-
-button {margin-top:10px;padding:10px;border:none;background:#ffae00;cursor:pointer;border-radius:5px;}
-
-.popup {display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:black;padding:20px;}
+.popup{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:black;padding:20px;}
 </style>
 </head>
 
@@ -32,41 +27,27 @@ button {margin-top:10px;padding:10px;border:none;background:#ffae00;cursor:point
 
 <div class="container">
 
-<div class="card">
-<h2>GTA 6</h2>
-<p>Büyük açık dünya oyunu.</p>
-<button onclick="openPopup('gta')">İncele</button>
-</div>
+<script>
+let games = [
+"GTA 6","FC 25","Call of Duty","Minecraft","Fortnite","Valorant",
+"RDR2","Cyberpunk","The Last of Us","God of War","Spider-Man",
+"FIFA 23","NBA 2K","Resident Evil","Assassin's Creed","Far Cry",
+"Battlefield","Hogwarts Legacy","Elden Ring","Dark Souls",
+"GTA 5","Forza Horizon","Need for Speed","CS2","PUBG",
+"Apex Legends","Among Us","Roblox","Brawl Stars","Clash Royale",
+"Rocket League","Fall Guys","Dying Light","Watch Dogs","Hitman",
+"Death Stranding","Days Gone","Uncharted","Ghost of Tsushima",
+"Skyrim","The Witcher 3","Metro Exodus","DOOM","Halo",
+"Overwatch","Terraria","Subnautica","Ark","Rust"
+];
 
+document.write(games.map(g=>`
 <div class="card">
-<h2>FC 25</h2>
-<p>Futbol oyunu.</p>
-<button onclick="openPopup('fc')">İncele</button>
+<h3>${g}</h3>
+<button onclick="openPopup('${g}')">İncele</button>
 </div>
-
-<div class="card">
-<h2>Call of Duty</h2>
-<p>FPS oyunu.</p>
-<button onclick="openPopup('cod')">İncele</button>
-</div>
-
-<div class="card">
-<h2>Minecraft</h2>
-<p>Sandbox oyunu.</p>
-<button onclick="openPopup('mc')">İncele</button>
-</div>
-
-<div class="card">
-<h2>Fortnite</h2>
-<p>Battle royale.</p>
-<button onclick="openPopup('fn')">İncele</button>
-</div>
-
-<div class="card">
-<h2>Valorant</h2>
-<p>Taktiksel FPS.</p>
-<button onclick="openPopup('val')">İncele</button>
-</div>
+`).join(""));
+</script>
 
 </div>
 
@@ -78,16 +59,8 @@ button {margin-top:10px;padding:10px;border:none;background:#ffae00;cursor:point
 
 <script>
 function openPopup(game){
-let title=document.getElementById("title");
-let desc=document.getElementById("desc");
-
-if(game=="gta"){title.innerText="GTA 6";desc.innerText="GTA 6 dev açık dünya oyunu.";}
-if(game=="fc"){title.innerText="FC 25";desc.innerText="Futbol deneyimi.";}
-if(game=="cod"){title.innerText="Call of Duty";desc.innerText="Aksiyon FPS.";}
-if(game=="mc"){title.innerText="Minecraft";desc.innerText="Yaratıcılık oyunu.";}
-if(game=="fn"){title.innerText="Fortnite";desc.innerText="Battle royale.";}
-if(game=="val"){title.innerText="Valorant";desc.innerText="Rekabetçi FPS.";}
-
+document.getElementById("title").innerText=game;
+document.getElementById("desc").innerText=game+" hakkında detaylar yakında eklenecek.";
 document.getElementById("popup").style.display="block";
 }
 
