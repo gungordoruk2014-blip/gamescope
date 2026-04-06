@@ -63,6 +63,20 @@ button {
     border-radius:5px;
     font-weight:bold;
 }
+
+/* POPUP */
+.popup {
+    display:none;
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:black;
+    color:white;
+    padding:20px;
+    overflow:auto;
+}
 </style>
 </head>
 
@@ -75,40 +89,90 @@ button {
 <div class="card">
 <h2>GTA 6</h2>
 <p>Rockstar Games tarafından geliştirilen büyük açık dünya oyunu.</p>
-<button onclick="alert('GTA 6 detayları yakında eklenecek')">İncele</button>
+<button onclick="openPopup('gta')">İncele</button>
 </div>
 
 <div class="card">
 <h2>FC 25</h2>
 <p>Yeni nesil futbol deneyimi.</p>
-<button onclick="alert('FC 25 detayları yakında eklenecek')">İncele</button>
+<button onclick="openPopup('fc')">İncele</button>
 </div>
 
 <div class="card">
 <h2>Call of Duty</h2>
 <p>Aksiyon dolu FPS serisi.</p>
-<button onclick="alert('Call of Duty detayları yakında eklenecek')">İncele</button>
+<button onclick="openPopup('cod')">İncele</button>
 </div>
 
 <div class="card">
 <h2>Minecraft</h2>
 <p>Sınırsız yaratıcılık sunan oyun.</p>
-<button onclick="alert('Minecraft detayları yakında eklenecek')">İncele</button>
+<button onclick="openPopup('mc')">İncele</button>
 </div>
 
 <div class="card">
 <h2>Fortnite</h2>
 <p>Battle royale türünün lideri.</p>
-<button onclick="alert('Fortnite detayları yakında eklenecek')">İncele</button>
+<button onclick="openPopup('fn')">İncele</button>
 </div>
 
 <div class="card">
 <h2>Valorant</h2>
 <p>Taktiksel FPS oyunu.</p>
-<button onclick="alert('Valorant detayları yakında eklenecek')">İncele</button>
+<button onclick="openPopup('val')">İncele</button>
 </div>
 
 </div>
+
+<!-- POPUP -->
+<div id="popup" class="popup">
+<h1 id="title"></h1>
+<p id="desc"></p>
+<button onclick="closePopup()">Kapat</button>
+</div>
+
+<script>
+function openPopup(game){
+    const title = document.getElementById("title");
+    const desc = document.getElementById("desc");
+
+    if(game === "gta"){
+        title.innerText = "GTA 6";
+        desc.innerText = "GTA 6, Rockstar Games tarafından geliştirilen ve yıllardır beklenen büyük açık dünya oyunudur. Dev harita, gerçekçi grafikler ve yeni hikaye ile geliyor.";
+    }
+
+    if(game === "fc"){
+        title.innerText = "FC 25";
+        desc.innerText = "FC 25, futbol severler için geliştirilmiş yeni nesil bir oyundur. Kariyer modu ve online rekabet sunar.";
+    }
+
+    if(game === "cod"){
+        title.innerText = "Call of Duty";
+        desc.innerText = "Call of Duty, aksiyon dolu FPS savaş deneyimi sunan popüler bir seridir.";
+    }
+
+    if(game === "mc"){
+        title.innerText = "Minecraft";
+        desc.innerText = "Minecraft, bloklarla sınırsız dünyalar kurabileceğin yaratıcı bir oyundur.";
+    }
+
+    if(game === "fn"){
+        title.innerText = "Fortnite";
+        desc.innerText = "Fortnite, battle royale türünde en popüler oyunlardan biridir.";
+    }
+
+    if(game === "val"){
+        title.innerText = "Valorant";
+        desc.innerText = "Valorant, taktiksel FPS oyunları arasında öne çıkan rekabetçi bir oyundur.";
+    }
+
+    document.getElementById("popup").style.display = "block";
+}
+
+function closePopup(){
+    document.getElementById("popup").style.display = "none";
+}
+</script>
 
 </body>
 </html>
