@@ -6,77 +6,23 @@
 <title>GameScope</title>
 
 <style>
-body {
-    margin:0;
-    font-family:Arial;
-    color:white;
-    background:black;
-}
-
-/* 🔥 ATEŞ */
+body {margin:0;font-family:Arial;color:white;background:black;}
 body::before {
-    content:"";
-    position:fixed;
-    width:100%;
-    height:100%;
-    background: radial-gradient(circle at 50% 100%, orange, red, black);
-    animation: fire 3s infinite alternate;
-    z-index:-1;
-}
+content:"";position:fixed;width:100%;height:100%;
+background: radial-gradient(circle at 50% 100%, orange, red, black);
+animation: fire 3s infinite alternate;z-index:-1;}
+@keyframes fire {0%{filter: blur(10px);}100%{filter: blur(25px);}}
 
-@keyframes fire {
-    0% {filter: blur(10px);}
-    100% {filter: blur(25px);}
-}
+header {text-align:center;padding:20px;font-size:30px;color:#ffae00;}
 
-header {
-    text-align:center;
-    padding:20px;
-    font-size:30px;
-    color:#ffae00;
-}
+.container {display:grid;grid-template-columns: repeat(auto-fit, minmax(250px,1fr));gap:20px;padding:20px;}
 
-.container {
-    display:grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
-    gap:20px;
-    padding:20px;
-}
+.card {background: rgba(0,0,0,0.7);padding:15px;border-radius:10px;transition:0.3s;}
+.card:hover {transform:scale(1.05);}
 
-.card {
-    background: rgba(0,0,0,0.7);
-    padding:15px;
-    border-radius:10px;
-    transition:0.3s;
-}
+button {margin-top:10px;padding:10px;border:none;background:#ffae00;cursor:pointer;border-radius:5px;}
 
-.card:hover {
-    transform:scale(1.05);
-}
-
-button {
-    margin-top:10px;
-    padding:10px;
-    border:none;
-    background:#ffae00;
-    cursor:pointer;
-    border-radius:5px;
-    font-weight:bold;
-}
-
-/* POPUP */
-.popup {
-    display:none;
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background:black;
-    color:white;
-    padding:20px;
-    overflow:auto;
-}
+.popup {display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:black;padding:20px;}
 </style>
 </head>
 
@@ -88,43 +34,42 @@ button {
 
 <div class="card">
 <h2>GTA 6</h2>
-<p>Rockstar Games tarafından geliştirilen büyük açık dünya oyunu.</p>
+<p>Büyük açık dünya oyunu.</p>
 <button onclick="openPopup('gta')">İncele</button>
 </div>
 
 <div class="card">
 <h2>FC 25</h2>
-<p>Yeni nesil futbol deneyimi.</p>
+<p>Futbol oyunu.</p>
 <button onclick="openPopup('fc')">İncele</button>
 </div>
 
 <div class="card">
 <h2>Call of Duty</h2>
-<p>Aksiyon dolu FPS serisi.</p>
+<p>FPS oyunu.</p>
 <button onclick="openPopup('cod')">İncele</button>
 </div>
 
 <div class="card">
 <h2>Minecraft</h2>
-<p>Sınırsız yaratıcılık sunan oyun.</p>
+<p>Sandbox oyunu.</p>
 <button onclick="openPopup('mc')">İncele</button>
 </div>
 
 <div class="card">
 <h2>Fortnite</h2>
-<p>Battle royale türünün lideri.</p>
+<p>Battle royale.</p>
 <button onclick="openPopup('fn')">İncele</button>
 </div>
 
 <div class="card">
 <h2>Valorant</h2>
-<p>Taktiksel FPS oyunu.</p>
+<p>Taktiksel FPS.</p>
 <button onclick="openPopup('val')">İncele</button>
 </div>
 
 </div>
 
-<!-- POPUP -->
 <div id="popup" class="popup">
 <h1 id="title"></h1>
 <p id="desc"></p>
@@ -133,44 +78,21 @@ button {
 
 <script>
 function openPopup(game){
-    const title = document.getElementById("title");
-    const desc = document.getElementById("desc");
+let title=document.getElementById("title");
+let desc=document.getElementById("desc");
 
-    if(game === "gta"){
-        title.innerText = "GTA 6";
-        desc.innerText = "GTA 6, Rockstar Games tarafından geliştirilen ve yıllardır beklenen büyük açık dünya oyunudur. Dev harita, gerçekçi grafikler ve yeni hikaye ile geliyor.";
-    }
+if(game=="gta"){title.innerText="GTA 6";desc.innerText="GTA 6 dev açık dünya oyunu.";}
+if(game=="fc"){title.innerText="FC 25";desc.innerText="Futbol deneyimi.";}
+if(game=="cod"){title.innerText="Call of Duty";desc.innerText="Aksiyon FPS.";}
+if(game=="mc"){title.innerText="Minecraft";desc.innerText="Yaratıcılık oyunu.";}
+if(game=="fn"){title.innerText="Fortnite";desc.innerText="Battle royale.";}
+if(game=="val"){title.innerText="Valorant";desc.innerText="Rekabetçi FPS.";}
 
-    if(game === "fc"){
-        title.innerText = "FC 25";
-        desc.innerText = "FC 25, futbol severler için geliştirilmiş yeni nesil bir oyundur. Kariyer modu ve online rekabet sunar.";
-    }
-
-    if(game === "cod"){
-        title.innerText = "Call of Duty";
-        desc.innerText = "Call of Duty, aksiyon dolu FPS savaş deneyimi sunan popüler bir seridir.";
-    }
-
-    if(game === "mc"){
-        title.innerText = "Minecraft";
-        desc.innerText = "Minecraft, bloklarla sınırsız dünyalar kurabileceğin yaratıcı bir oyundur.";
-    }
-
-    if(game === "fn"){
-        title.innerText = "Fortnite";
-        desc.innerText = "Fortnite, battle royale türünde en popüler oyunlardan biridir.";
-    }
-
-    if(game === "val"){
-        title.innerText = "Valorant";
-        desc.innerText = "Valorant, taktiksel FPS oyunları arasında öne çıkan rekabetçi bir oyundur.";
-    }
-
-    document.getElementById("popup").style.display = "block";
+document.getElementById("popup").style.display="block";
 }
 
 function closePopup(){
-    document.getElementById("popup").style.display = "none";
+document.getElementById("popup").style.display="none";
 }
 </script>
 
