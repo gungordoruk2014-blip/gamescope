@@ -2,69 +2,22 @@
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GameScope</title>
 
 <style>
-body{margin:0;font-family:Arial;color:white;background:black;}
-body::before{
-content:"";position:fixed;width:100%;height:100%;
-background: radial-gradient(circle at 50% 100%, orange, red, black);
-animation:fire 3s infinite alternate;z-index:-1;}
-@keyframes fire{0%{filter:blur(10px);}100%{filter:blur(25px);}}
-
-header{text-align:center;padding:20px;font-size:30px;color:#ffae00;}
-
-.container{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:15px;
-padding:20px;
-}
-
-.card{
-background:rgba(0,0,0,0.7);
-padding:10px;
-border-radius:10px;
-text-align:center;
-transition:0.3s;
-}
-
-.card:hover{transform:scale(1.05);}
-
-img{
-width:100%;
-height:120px;
-object-fit:cover;
-border-radius:8px;
-}
-
-button{
-margin-top:10px;
-padding:8px;
-background:#ffae00;
-border:none;
-border-radius:5px;
-cursor:pointer;
-}
-
-.popup{
-display:none;
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:black;
-padding:20px;
-overflow:auto;
-}
+body{margin:0;background:black;color:white;font-family:Arial;}
+header{text-align:center;padding:20px;font-size:30px;color:orange;}
+.container{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;padding:20px;}
+.card{background:#111;padding:10px;border-radius:10px;text-align:center;}
+img{width:100%;height:120px;object-fit:cover;border-radius:8px;}
+button{margin-top:10px;padding:8px;background:orange;border:none;border-radius:5px;}
+.popup{display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:black;padding:20px;}
 </style>
 </head>
 
 <body>
 
-<header>🔥 GameScope 🔥</header>
+<header>🎮 GameScope</header>
 
 <div class="container" id="games"></div>
 
@@ -75,41 +28,33 @@ overflow:auto;
 </div>
 
 <script>
+
 let games = [
 "GTA 6","FC 25","Call of Duty","Minecraft","Fortnite","Valorant",
-"RDR2","Cyberpunk","The Last of Us","God of War","Spider-Man",
-"FIFA 23","NBA 2K","Resident Evil","Assassin's Creed","Far Cry",
-"Battlefield","Hogwarts Legacy","Elden Ring","Dark Souls",
-"GTA 5","Forza Horizon","Need for Speed","CS2","PUBG",
-"Apex Legends","Among Us","Roblox","Brawl Stars","Clash Royale",
-"Rocket League","Fall Guys","Dying Light","Watch Dogs","Hitman",
-"Death Stranding","Days Gone","Uncharted","Ghost of Tsushima",
-"Skyrim","The Witcher 3","Metro Exodus","DOOM","Halo",
-"Overwatch","Terraria","Subnautica","Ark","Rust"
+"RDR2","Cyberpunk","God of War","Spider-Man"
 ];
 
-let container=document.getElementById("games");
+let html = "";
 
-games.forEach(game=>{
-container.innerHTML+=`
+for(let i=0;i<games.length;i++){
+html += `
 <div class="card">
-<img src="https://source.unsplash.com/400x300/?game,${game}">
-<h3>${game}</h3>
-<button onclick="openPopup('${game}')">İncele</button>
-</div>`;
-});
+<img src="https://picsum.photos/400/300?random=${i}">
+<h3>${games[i]}</h3>
+<button onclick="openGame('${games[i]}')">İncele</button>
+</div>
+`;
+}
 
-function openPopup(game){
-let title=document.getElementById("title");
-let desc=document.getElementById("desc");
+document.getElementById("games").innerHTML = html;
 
-title.innerText=game;
+function openGame(game){
+document.getElementById("title").innerText = game;
 
 if(game=="GTA 6"){
-desc.innerText="GTA 6, Rockstar Games tarafından geliştirilen ve yıllardır beklenen en büyük açık dünya oyunlarından biridir. Oyunculara devasa bir harita, gerçekçi grafikler ve detaylı bir hikaye sunması beklenmektedir. Bu oyun, şehir yaşamını, suç dünyasını ve karakter etkileşimlerini en üst seviyeye taşıyacak şekilde tasarlanmıştır. Oyuncular özgürce dolaşabilir, görevler yapabilir ve kendi hikayelerini oluşturabilir. GTA 6’nın grafik motoru önceki oyunlara göre çok daha gelişmiş olup gerçek hayata çok yakın bir deneyim sunar. Araç sürüşü, karakter hareketleri ve çevre etkileşimleri tamamen yenilenmiştir. Rockstar’ın uzun yıllar süren çalışmasının sonucu olan bu oyun, oyun dünyasında büyük bir devrim yaratabilir.";
-}
-else{
-desc.innerText=game+" hakkında detaylar yakında eklenecek.";
+document.getElementById("desc").innerText="GTA 6 Rockstar Games'in en büyük oyunu olacak. Dev harita, gerçekçi grafikler ve özgür oynanış sunacak. Oyuncular şehirde istedikleri gibi dolaşıp görev yapabilecek.";
+}else{
+document.getElementById("desc").innerText=game+" hakkında bilgiler yakında eklenecek.";
 }
 
 document.getElementById("popup").style.display="block";
@@ -118,6 +63,7 @@ document.getElementById("popup").style.display="block";
 function closePopup(){
 document.getElementById("popup").style.display="none";
 }
+
 </script>
 
 </body>
