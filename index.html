@@ -1,41 +1,119 @@
 <!DOCTYPE html>
-<html>
+<html lang="tr">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GameScope</title>
+
+<style>
+body {
+    margin:0;
+    font-family:Arial;
+    color:white;
+    background: black;
+    overflow-x:hidden;
+}
+
+/* 🔥 ATEŞ ARKA PLAN */
+body::before {
+    content:"";
+    position:fixed;
+    width:100%;
+    height:100%;
+    background: radial-gradient(circle at 50% 100%, orange, red, black);
+    animation: fire 3s infinite alternate;
+    z-index:-1;
+}
+
+@keyframes fire {
+    0% {filter: blur(10px) brightness(1);}
+    100% {filter: blur(20px) brightness(1.5);}
+}
+
+header {
+    text-align:center;
+    padding:20px;
+    font-size:30px;
+    color:#ffae00;
+}
+
+/* GRID */
+.container {
+    display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+    gap:20px;
+    padding:20px;
+}
+
+/* KART */
+.card {
+    background: rgba(0,0,0,0.7);
+    padding:15px;
+    border-radius:10px;
+    transition:0.3s;
+}
+
+.card:hover {
+    transform:scale(1.05);
+}
+
+/* BUTON */
+button {
+    margin-top:10px;
+    padding:10px;
+    border:none;
+    background:#ffae00;
+    cursor:pointer;
+    border-radius:5px;
+    font-weight:bold;
+}
+</style>
+
 </head>
-<body style="background:black; color:white; font-family:Arial;">
 
-<h1>🎮 GameScope</h1>
+<body>
 
-<h2>GTA 6</h2><button onclick="window.location.href='gta6.html'">İncele</button>
-<p>Rockstar Games tarafından geliştirilen ve uzun süredir beklenen büyük bir açık dünya oyunudur<p>
-GTA 6, Rockstar Games tarafından geliştirilen ve uzun yıllardır beklenen en büyük açık dünya oyunlarından biridir. Oyunculara devasa bir harita, gerçekçi grafikler ve detaylı bir hikaye sunması beklenmektedir. Rockstar'ın bu oyun üzerinde uzun süre çalışması, kalitenin ne kadar yüksek olacağını gösteriyor. GTA 6, oyun dünyasında yeni bir çağ başlatabilecek kadar büyük bir proje olarak görülüyor.
-</p>.</p>
+<header>🔥 GameScope 🔥</header>
 
+<div class="container">
+
+<div class="card">
+<h2>GTA 6</h2>
+<p>Rockstar Games tarafından geliştirilen ve uzun süredir beklenen büyük açık dünya oyunudur.</p>
+<button onclick="window.location.href='gta6.html'">İncele</button>
+</div>
+
+<div class="card">
 <h2>FC 25</h2>
-<p>Futbol severler için yeni nesil kariyer ve online modlar sunan popüler bir oyundur<p>
-FC 25, futbol severler için geliştirilmiş yeni nesil bir spor oyunudur. Gelişmiş kariyer modu, gerçekçi oyuncu hareketleri ve online rekabet sistemi ile dikkat çekmektedir. Oyuncular kendi takımlarını kurarak dünya çapında rakiplere karşı mücadele edebilir.
-</p>.</p>
+<p>Yeni nesil futbol deneyimi sunan popüler spor oyunu.</p>
+<button>İncele</button>
+</div>
 
+<div class="card">
 <h2>Call of Duty</h2>
-<p>Aksiyon ve savaş deneyimini en üst seviyeye taşıyan bir FPS serisidir.<p>
-Call of Duty, aksiyon ve savaş deneyimini en üst seviyeye taşıyan popüler bir FPS serisidir. Gerçekçi silah mekanikleri, sürükleyici hikaye modu ve rekabetçi online savaşları ile milyonlarca oyuncuya hitap etmektedir.
-</p></p>
+<p>Aksiyon dolu savaş deneyimi sunan FPS serisi.</p>
+<button>İncele</button>
+</div>
 
+<div class="card">
 <h2>Minecraft</h2>
-<p>Bloklarla sınırsız dünyalar kurabileceğin yaratıcı bir oyundur<p>
-Minecraft, oyunculara sınırsız yaratıcılık sunan bir sandbox oyunudur. Bloklardan oluşan dünyada istediğiniz her şeyi inşa edebilir, hayatta kalma modunda maceralar yaşayabilirsiniz. Her yaştan oyuncuya hitap eden eşsiz bir deneyim sunar.
-</p>.</p>
+<p>Sınırsız yaratıcılık sunan sandbox oyunu.</p>
+<button>İncele</button>
+</div>
 
+<div class="card">
 <h2>Fortnite</h2>
-<p>Battle royale türünde en popüler oyunlardan biridir<p>
-Fortnite, battle royale türünde en popüler oyunlardan biridir. 100 oyuncunun hayatta kalma mücadelesi verdiği bu oyunda hızlı refleksler ve strateji çok önemlidir. Sürekli güncellenen içerikler oyunu her zaman canlı tutar.
-</p>.</p>
+<p>Battle royale türünün en popüler oyunlarından biri.</p>
+<button>İncele</button>
+</div>
 
+<div class="card">
 <h2>Valorant</h2>
-<p>Rekabetçi FPS oyunları arasında öne çıkan taktiksel bir oyundur.<p>
-Valorant, Riot Games tarafından geliştirilen rekabetçi bir FPS oyunudur. Karakter bazlı yetenekler ve taktiksel oynanış ile dikkat çeker. Takım çalışması ve strateji bu oyunda kazanmanın anahtarıdır.
-</p></p>
+<p>Taktiksel rekabetçi FPS oyunu.</p>
+<button>İncele</button>
+</div>
+
+</div>
 
 </body>
 </html>
