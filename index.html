@@ -1,1 +1,46 @@
 <h1>YENİ TEST BURASI</h1>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>GameScope</title>
+</head>
+
+<body style="
+margin:0;
+font-family:Arial;
+color:white;
+text-align:center;
+background: radial-gradient(circle at bottom, orange, red, black);
+">
+
+<h1 style="padding:20px;">🔥 GameScope 🔥</h1>
+
+<div id="alan"></div>
+
+<script>
+let oyunlar = [
+"GTA 6","FC 25","Call of Duty","Minecraft","Fortnite","Valorant",
+"RDR2","Cyberpunk","God of War","Spider-Man",
+"FIFA 23","NBA 2K","Resident Evil","Assassin's Creed","Far Cry",
+"Battlefield","Hogwarts Legacy","Elden Ring","Dark Souls","GTA 5",
+"Forza Horizon","Need for Speed","CS2","PUBG",
+"Apex Legends","Among Us","Roblox","Brawl Stars","Clash Royale","Rocket League"
+];
+
+let alan = document.getElementById("alan");
+
+oyunlar.forEach(o => {
+alan.innerHTML += `
+<div style="background:#111;margin:15px;padding:15px;border-radius:10px;">
+<h2>${o}</h2>
+<button onclick="alert('${o} çok popüler ve eğlenceli bir oyundur. Grafikler iyidir. Oynanışı akıcıdır. Oyuncular saatlerce oynayabilir.')">
+İncele
+</button>
+</div>
+`;
+});
+</script>
+
+</body>
+</html>
