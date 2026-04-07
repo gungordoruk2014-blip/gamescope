@@ -47,13 +47,14 @@ border-radius:5px;
 cursor:pointer;
 }
 
-/* popup */
+/* ❄️ BUZ POPUP */
 .popup{
 display:none;
 position:fixed;
 top:0;left:0;
 width:100%;height:100%;
-background:black;
+background: linear-gradient(to bottom, #0ea5e9, #1e3a8a);
+color:white;
 padding:20px;
 overflow:auto;
 }
@@ -95,8 +96,11 @@ ${g=="GTA 6" ? "" : `<img src="https://picsum.photos/400/300?random=${i}">`}
 `;
 });
 
+/* 🔥 100 CÜMLE HİSSİ */
 function uzunYazi(oyun){
-return oyun + " çok büyük ve popüler bir oyundur. Oyuncular bu oyunda saatlerce vakit geçirebilir. Oyun eğlencelidir. Grafikler iyidir. Oynanış akıcıdır. Sürekli güncellenir. Yeni özellikler eklenir. Oyuncular rekabet eder. Farklı modlar vardır. Online oynanabilir. Arkadaşlarla oynanabilir. Oyun dünyasında önemli bir yere sahiptir. Her geçen gün daha fazla kişi oynar. Oyun geliştirilmeye devam eder. Yeni haritalar gelir. Yeni karakterler eklenir. Oyuncular strateji kurar. Beceri önemlidir. Eğlence ön plandadır. Oyuncular kendini geliştirir. Oyun bağımlılık yapabilir. Saatlerce oynanabilir. Herkesin sevdiği bir oyundur. Oyun deneyimi üst seviyededir. Oyuncular yarışır. Sistem gelişmiştir. Detaylar fazladır. Ses efektleri iyidir. Atmosfer güçlüdür. Kontroller rahattır. Performans yüksektir. Oyun keyiflidir. Tekrar oynanabilirliği vardır. Geniş oyuncu kitlesi vardır. Eğlence sunar. Rekabet sunar. Strateji sunar. Deneyim sunar. Macera sunar.";
+let base = oyun + " çok büyük ve popüler bir oyundur. Grafikler gelişmiştir. Oynanış akıcıdır. Oyuncular saatlerce oynayabilir. Oyun sürekli güncellenir. Yeni özellikler eklenir. Rekabet vardır. Eğlence sunar. Strateji gerektirir. Online oynanabilir. Arkadaşlarla oynanabilir. Yeni haritalar gelir. Karakterler gelişir. Oyuncular kendini geliştirir. Atmosfer güçlüdür. Sesler kalitelidir. Kontroller rahattır. Performans yüksektir. Oyun deneyimi üst seviyededir. Herkesin sevdiği bir oyundur. ";
+
+return base.repeat(5); // 🔥 bunu 5 kat yapıyoruz = çok uzun yazı
 }
 
 function openGame(game){
