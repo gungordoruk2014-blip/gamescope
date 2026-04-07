@@ -1,44 +1,115 @@
 <!DOCTYPE html>
-<html>
+<html lang="tr">
 <head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GameScope</title>
+
+<style>
+body{margin:0;font-family:Arial;color:white;background:black;}
+body::before{
+content:"";position:fixed;width:100%;height:100%;
+background: radial-gradient(circle at 50% 100%, orange, red, black);
+animation:fire 3s infinite alternate;z-index:-1;}
+@keyframes fire{0%{filter:blur(10px);}100%{filter:blur(25px);}}
+
+header{text-align:center;padding:20px;font-size:30px;color:#ffae00;}
+
+.container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:15px;
+padding:20px;
+}
+
+.card{
+background:rgba(0,0,0,0.7);
+padding:10px;
+border-radius:10px;
+text-align:center;
+transition:0.3s;
+}
+.card:hover{transform:scale(1.05);}
+
+img{
+width:100%;
+height:120px;
+object-fit:cover;
+border-radius:8px;
+}
+
+button{
+margin-top:10px;
+padding:8px;
+background:#ffae00;
+border:none;
+border-radius:5px;
+cursor:pointer;
+}
+
+/* popup */
+.popup{
+display:none;
+position:fixed;
+top:0;left:0;
+width:100%;height:100%;
+background:black;
+padding:20px;
+overflow:auto;
+}
+</style>
 </head>
 
-<body style="background:black;color:white;text-align:center;font-family:Arial;">
+<body>
 
-<h1>🎮 GameScope</h1>
+<header>🔥 GameScope 🔥</header>
+
+<div class="container" id="games"></div>
+
+<div id="popup" class="popup">
+<h1 id="title"></h1>
+<p id="desc"></p>
+<button onclick="closePopup()">Kapat</button>
+</div>
 
 <script>
-function ac(oyun){
-let yazi = "";
 
-if(oyun=="GTA 6"){
-yazi = "GTA 6 Rockstar Games'in en büyük oyunlarından biridir. Dev harita, gerçekçi grafikler, özgür oynanış sunar. Oyuncular şehirde dolaşabilir, görev yapabilir ve kendi hikayelerini oluşturabilir. Oyun dünyası çok detaylıdır. Araçlar, karakterler ve görevler gelişmiştir. Oyuncular saatlerce oynayabilir. Bu oyun oyun dünyasında büyük bir etki yaratacaktır.";
-}else{
-yazi = oyun + " çok popüler bir oyundur. Eğlencelidir, rekabet içerir ve milyonlarca kişi tarafından oynanmaktadır. Oyun sürekli güncellenir ve yeni özellikler eklenir.";
+let games = [
+"GTA 6","FC 25","Call of Duty","Minecraft","Fortnite","Valorant",
+"RDR2","Cyberpunk","God of War","Spider-Man",
+"FIFA 23","NBA 2K","Resident Evil","Assassin's Creed","Far Cry",
+"Battlefield","Hogwarts Legacy","Elden Ring","Dark Souls","GTA 5",
+"Forza Horizon","Need for Speed","CS2","PUBG",
+"Apex Legends","Among Us","Roblox","Brawl Stars","Clash Royale","Rocket League"
+];
+
+let container = document.getElementById("games");
+
+games.forEach((g,i)=>{
+container.innerHTML += `
+<div class="card">
+${g=="GTA 6" ? "" : `<img src="https://picsum.photos/400/300?random=${i}">`}
+<h3>${g}</h3>
+<button onclick="openGame('${g}')">İncele</button>
+</div>
+`;
+});
+
+function uzunYazi(oyun){
+return oyun + " çok büyük ve popüler bir oyundur. Oyuncular bu oyunda saatlerce vakit geçirebilir. Oyun eğlencelidir. Grafikler iyidir. Oynanış akıcıdır. Sürekli güncellenir. Yeni özellikler eklenir. Oyuncular rekabet eder. Farklı modlar vardır. Online oynanabilir. Arkadaşlarla oynanabilir. Oyun dünyasında önemli bir yere sahiptir. Her geçen gün daha fazla kişi oynar. Oyun geliştirilmeye devam eder. Yeni haritalar gelir. Yeni karakterler eklenir. Oyuncular strateji kurar. Beceri önemlidir. Eğlence ön plandadır. Oyuncular kendini geliştirir. Oyun bağımlılık yapabilir. Saatlerce oynanabilir. Herkesin sevdiği bir oyundur. Oyun deneyimi üst seviyededir. Oyuncular yarışır. Sistem gelişmiştir. Detaylar fazladır. Ses efektleri iyidir. Atmosfer güçlüdür. Kontroller rahattır. Performans yüksektir. Oyun keyiflidir. Tekrar oynanabilirliği vardır. Geniş oyuncu kitlesi vardır. Eğlence sunar. Rekabet sunar. Strateji sunar. Deneyim sunar. Macera sunar.";
 }
 
-alert(yazi);
+function openGame(game){
+document.getElementById("title").innerText = game;
+document.getElementById("desc").innerText = uzunYazi(game);
+document.getElementById("popup").style.display="block";
 }
+
+function closePopup(){
+document.getElementById("popup").style.display="none";
+}
+
 </script>
-
-<h2>GTA 6</h2>
-<button onclick="ac('GTA 6')">İncele</button>
-
-<h2>FC 25</h2>
-<button onclick="ac('FC 25')">İncele</button>
-
-<h2>Call of Duty</h2>
-<button onclick="ac('Call of Duty')">İncele</button>
-
-<h2>Minecraft</h2>
-<button onclick="ac('Minecraft')">İncele</button>
-
-<h2>Fortnite</h2>
-<button onclick="ac('Fortnite')">İncele</button>
-
-<h2>Valorant</h2>
-<button onclick="ac('Valorant')">İncele</button>
 
 </body>
 </html>
