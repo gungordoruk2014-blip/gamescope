@@ -1,46 +1,183 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="tr">
 <head>
-<meta charset="UTF-8">
-<title>GameScope</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GameScope</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: white;
+      background: radial-gradient(circle at bottom, #ff8a00 0%, #d62828 28%, #0b0b0b 68%);
+      min-height: 100vh;
+    }
+    header {
+      text-align: center;
+      padding: 28px 16px 12px;
+      font-size: 34px;
+      font-weight: 700;
+      text-shadow: 0 2px 10px rgba(0,0,0,.35);
+    }
+    .sub {
+      text-align: center;
+      color: #ffe7c2;
+      margin-bottom: 20px;
+      padding: 0 14px;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 18px;
+      padding: 18px;
+      max-width: 1300px;
+      margin: 0 auto 32px;
+    }
+    .card {
+      background: rgba(12,12,12,.78);
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 24px rgba(0,0,0,.28);
+      transition: transform .18s ease, box-shadow .18s ease;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 30px rgba(0,0,0,.34);
+    }
+    .thumb {
+      width: 100%;
+      height: 140px;
+      object-fit: cover;
+      display: block;
+      background: #222;
+    }
+    .content {
+      padding: 14px;
+      text-align: center;
+    }
+    .content h2 {
+      margin: 0 0 8px;
+      font-size: 22px;
+    }
+    .content p {
+      margin: 0 0 12px;
+      color: #e7e7e7;
+      min-height: 38px;
+      line-height: 1.35;
+    }
+    button {
+      border: none;
+      background: #ffb000;
+      color: #111;
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+    .popup {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(180deg, #7dd3fc, #2563eb);
+      color: white;
+      overflow: auto;
+      z-index: 20;
+    }
+    .popup-inner {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 22px;
+      background: rgba(0,0,0,.18);
+      border-radius: 18px;
+      box-shadow: 0 14px 30px rgba(0,0,0,.22);
+    }
+    .popup h1 { margin-top: 0; }
+    .popup p { line-height: 1.7; font-size: 17px; }
+    .close-row { margin-top: 18px; }
+  </style>
 </head>
+<body>
+  <header>🔥 GameScope 🔥</header>
+  <div class="sub">Yeni oyunlar, büyük yapımlar ve tek tıkla detaylar.</div>
 
-<body style="
-margin:0;
-font-family:Arial;
-color:white;
-text-align:center;
-background: radial-gradient(circle at bottom, orange, red, black);
-">
+  <div class="grid" id="games"></div>
 
-<h1 style="padding:20px;">🔥 GameScope 🔥</h1>
+  <div id="popup" class="popup">
+    <div class="popup-inner">
+      <h1 id="popupTitle"></h1>
+      <p id="popupDesc"></p>
+      <div class="close-row">
+        <button onclick="closePopup()">Kapat</button>
+      </div>
+    </div>
+  </div>
 
-<div id="alan"></div>
+  <script>
+    const games = [
+      { name: 'GTA 6', image: '', short: 'Rockstar’ın en çok beklenen açık dünya oyunu.' },
+      { name: 'FC 25', image: 'https://picsum.photos/seed/fc25/500/300', short: 'Yeni nesil futbol deneyimi ve rekabet.' },
+      { name: 'Call of Duty', image: 'https://picsum.photos/seed/cod/500/300', short: 'Aksiyon dolu savaş ve FPS deneyimi.' },
+      { name: 'Minecraft', image: 'https://picsum.photos/seed/minecraft/500/300', short: 'Sınırsız yaratıcılık ve keşif.' },
+      { name: 'Fortnite', image: 'https://picsum.photos/seed/fortnite/500/300', short: 'Battle royale türünün en ünlülerinden.' },
+      { name: 'Valorant', image: 'https://picsum.photos/seed/valorant/500/300', short: 'Taktiksel FPS ve takım oyunu.' },
+      { name: 'RDR2', image: 'https://picsum.photos/seed/rdr2/500/300', short: 'Vahşi batıda sinematik macera.' },
+      { name: 'Cyberpunk 2077', image: 'https://picsum.photos/seed/cyberpunk/500/300', short: 'Gelecek dünyasında aksiyon-RPG.' },
+      { name: 'God of War', image: 'https://picsum.photos/seed/gow/500/300', short: 'Efsanevi dövüşler ve güçlü hikâye.' },
+      { name: 'Spider-Man', image: 'https://picsum.photos/seed/spiderman/500/300', short: 'Süper kahraman aksiyonu ve hızlı oynanış.' },
+      { name: 'Resident Evil', image: 'https://picsum.photos/seed/re/500/300', short: 'Korku, gerilim ve hayatta kalma.' },
+      { name: 'Assassin\'s Creed', image: 'https://picsum.photos/seed/ac/500/300', short: 'Tarihsel atmosferde aksiyon ve gizlilik.' },
+      { name: 'Far Cry', image: 'https://picsum.photos/seed/farcry/500/300', short: 'Açık dünyada kaos ve görevler.' },
+      { name: 'Battlefield', image: 'https://picsum.photos/seed/battlefield/500/300', short: 'Geniş ölçekli savaş atmosferi.' },
+      { name: 'Hogwarts Legacy', image: 'https://picsum.photos/seed/hogwarts/500/300', short: 'Büyücülük dünyasında macera.' },
+      { name: 'Elden Ring', image: 'https://picsum.photos/seed/eldenring/500/300', short: 'Zorlu boss savaşları ve keşif.' },
+      { name: 'Dark Souls', image: 'https://picsum.photos/seed/darksouls/500/300', short: 'Sabır ve beceri isteyen karanlık macera.' },
+      { name: 'GTA 5', image: 'https://picsum.photos/seed/gta5/500/300', short: 'Serinin klasikleşmiş açık dünya oyunu.' },
+      { name: 'Forza Horizon', image: 'https://picsum.photos/seed/forza/500/300', short: 'Açık dünyada hızlı yarış deneyimi.' },
+      { name: 'Need for Speed', image: 'https://picsum.photos/seed/nfs/500/300', short: 'Sokak yarışları ve modifiye heyecanı.' },
+      { name: 'CS2', image: 'https://picsum.photos/seed/cs2/500/300', short: 'Rekabetçi FPS klasikleri arasında.' },
+      { name: 'PUBG', image: 'https://picsum.photos/seed/pubg/500/300', short: 'Gerilimli hayatta kalma savaşı.' },
+      { name: 'Apex Legends', image: 'https://picsum.photos/seed/apex/500/300', short: 'Hızlı tempolu kahraman tabanlı BR.' },
+      { name: 'Among Us', image: 'https://picsum.photos/seed/amongus/500/300', short: 'Arkadaşlarla şüphe ve strateji oyunu.' },
+      { name: 'Roblox', image: 'https://picsum.photos/seed/roblox/500/300', short: 'Birçok farklı oyunun olduğu platform.' },
+      { name: 'Brawl Stars', image: 'https://picsum.photos/seed/brawlstars/500/300', short: 'Hızlı maçlar ve eğlenceli karakterler.' },
+      { name: 'Clash Royale', image: 'https://picsum.photos/seed/clashroyale/500/300', short: 'Kart stratejisi ve kule savunması.' },
+      { name: 'Rocket League', image: 'https://picsum.photos/seed/rocketleague/500/300', short: 'Arabalarla futbolun çılgın hali.' },
+      { name: 'Overwatch', image: 'https://picsum.photos/seed/overwatch/500/300', short: 'Renkli kahramanlar ve takım savaşı.' },
+      { name: 'Rust', image: 'https://picsum.photos/seed/rust/500/300', short: 'Hayatta kalma ve üs kurma mücadelesi.' }
+    ];
 
-<script>
-let oyunlar = [
-"GTA 6","FC 25","Call of Duty","Minecraft","Fortnite","Valorant",
-"RDR2","Cyberpunk","God of War","Spider-Man",
-"FIFA 23","NBA 2K","Resident Evil","Assassin's Creed","Far Cry",
-"Battlefield","Hogwarts Legacy","Elden Ring","Dark Souls","GTA 5",
-"Forza Horizon","Need for Speed","CS2","PUBG",
-"Apex Legends","Among Us","Roblox","Brawl Stars","Clash Royale","Rocket League"
-];
+    function longDescription(game) {
+      if (game === 'GTA 6') {
+        return 'GTA 6, Rockstar Games tarafından geliştirilen ve oyun dünyasında yıllardır en çok konuşulan yapımlardan biri olarak öne çıkan büyük bir açık dünya oyunudur. Bu yapımın en dikkat çekici tarafı, oyuncuya çok daha canlı, detaylı ve özgür hissettiren bir şehir sunması beklentisidir. Büyük harita yapısı, gelişmiş karakter etkileşimleri, daha gerçekçi sürüş sistemi ve güçlü görev tasarımı ile öne çıkması beklenir. Oyuncular yalnızca ana görevleri takip etmekle kalmayıp şehir yaşamının içine de karışabilecek, farklı bölgeleri keşfedebilecek, yan etkinliklerle vakit geçirebilecek ve kendi oyun tarzını oluşturabilecektir. Grafik kalitesinin çok daha ileri taşınması, çevre detaylarının artması, kalabalık şehir hissinin güçlenmesi ve hikâye anlatımının daha sinematik hâle gelmesi oyuna olan beklentiyi çok büyütmüştür. Rockstar\'ın önceki oyunlarda yakaladığı kalite düşünüldüğünde, GTA 6\'nın yalnızca bir devam oyunu değil, aynı zamanda oyun sektöründe yeni standartlar belirleyebilecek güçlü bir proje olması beklenmektedir. Oyunun çıkışıyla birlikte açık dünya türünde büyük bir etki yaratması ve uzun yıllar boyunca konuşulması şaşırtıcı olmayacaktır.';
+      }
+      const base = `${game}, oyun dünyasında dikkat çeken ve geniş oyuncu kitlesi bulunan popüler yapımlardan biridir. Bu oyunun öne çıkan tarafları arasında eğlenceli oynanış, tekrar tekrar oynanabilir yapı, güçlü atmosfer ve oyuncuyu oyunda tutan rekabet veya keşif hissi bulunur. Grafik kalitesi, ses tasarımı, kontrol rahatlığı ve oyun içi tempo onu sevenler için önemli artılardır. Bazı oyunlarda hikâye ön plandayken bazılarında rekabet, hız, beceri veya takım oyunu öne çıkar. ${game} da bu yönüyle oyuncuya kendi tarzına göre vakit geçirebileceği bir alan sunar. Güncellemeler, yeni içerikler, farklı modlar ve oyuncu topluluğunun ilgisi bu oyunun uzun süre gündemde kalmasına yardımcı olur. İster tek başına ister arkadaşlarla oynansın, bu oyun oyuncuya sürükleyici, eğlenceli ve tatmin edici bir deneyim vermeyi amaçlar.`;
+      return base + ' ' + base;
+    }
 
-let alan = document.getElementById("alan");
+    const grid = document.getElementById('games');
+    grid.innerHTML = games.map((g, i) => `
+      <div class="card">
+        ${g.image ? `<img class="thumb" src="${g.image}" alt="${g.name}">` : `<div class="thumb" style="display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:700;background:linear-gradient(135deg,#3b0a0a,#111);">${g.name}</div>`}
+        <div class="content">
+          <h2>${g.name}</h2>
+          <p>${g.short}</p>
+          <button onclick="openPopup(${i})">İncele</button>
+        </div>
+      </div>
+    `).join('');
 
-oyunlar.forEach(o => {
-alan.innerHTML += `
-<div style="background:#111;margin:15px;padding:15px;border-radius:10px;">
-<h2>${o}</h2>
-<button onclick="alert('${o} çok popüler ve eğlenceli bir oyundur. Grafikler iyidir. Oynanışı akıcıdır. Oyuncular saatlerce oynayabilir.')">
-İncele
-</button>
-</div>
-`;
-});
-</script>
+    function openPopup(index) {
+      const game = games[index];
+      document.getElementById('popupTitle').innerText = game.name;
+      document.getElementById('popupDesc').innerText = longDescription(game.name);
+      document.getElementById('popup').style.display = 'block';
+    }
 
+    function closePopup() {
+      document.getElementById('popup').style.display = 'none';
+    }
+  </script>
 </body>
 </html>
